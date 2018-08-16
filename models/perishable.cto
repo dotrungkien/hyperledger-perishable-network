@@ -60,3 +60,11 @@ participant Importer extends Business {
 
 participant Shipper extends Business {
 }
+
+abstract transaction ShipmentTransaction {
+  --> Shipment shipment
+}
+
+transaction TemperatureReading extends ShipmentTransaction {
+  o Double centigrade
+}
