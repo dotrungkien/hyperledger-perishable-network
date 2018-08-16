@@ -1,0 +1,48 @@
+rule CanDelete {
+  description: "Billy can delete contracts that he is a part of"
+  participant(m): "framgia.quickship.Grower#billy@gmail.com"
+  operation: DELETE
+  resource(v): "framgia.quickship.Contract"
+  condition: (v.grower.getIdentifier() == m.getIdentifier())
+  action: ALLOW
+}
+
+rule CannotDelete {
+  description: "Billy cannot delete any asset"
+  participant: "framgia.quickship.Grower#billy@gmail.com"
+  operation: DELETE
+  resource: "org.hyperledger.composer.system.Asset"
+  action: DENY
+}
+
+rule Default {
+  description: "Allow all participants access to all resources"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "framgia.quickship.**"
+  action: ALLOW
+}
+
+rule SystemACL {
+  description: "All Access - grant everything to everyone"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule NetworkAdminUser {
+  description: "Grant business network administrators full access to USER resources"
+  participant: "org.hyperledger.composer.system.NetworkAdmin"
+  operation: ALL
+  resource: "**"
+  action: ALLOW
+}
+
+rule NetworkAdminSystem {
+  description: "Grant business network administrators full access to SYSTEM resources"
+  participant: "org.hyperledger.composer.system.NetworkAdmin"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
