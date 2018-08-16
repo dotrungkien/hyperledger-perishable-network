@@ -42,9 +42,6 @@ abstract participant Business identified by email {
   o Double accountBalance
 }
 
-concept TemperatureReading {
-}
-
 concept Address {
   o String country
   o String city optional
@@ -67,4 +64,7 @@ abstract transaction ShipmentTransaction {
 
 transaction TemperatureReading extends ShipmentTransaction {
   o Double centigrade
+}
+
+transaction ShipmentReceived extends ShipmentTransaction {
 }

@@ -1,3 +1,11 @@
+rule growerTempReading {
+  description: "Grower cannot subbmit temp readings"
+  participant: "framgia.quickship.Grower"
+  operation: ALL
+  resource: "framgia.quickship.TemperatureReading"
+  action: DENY
+}
+
 rule CanDelete {
   description: "Billy can delete contracts that he is a part of"
   participant(m): "framgia.quickship.Grower#billy@gmail.com"
